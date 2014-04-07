@@ -1,0 +1,15 @@
+--------------
+Selection Sort
+--------------
+ArrayList successfully sorted by Selection Sort
+SLList successfully sorted by Selection Sort
+--------------
+Bubble Sort
+--------------
+ArrayList successfully sorted by Bubble Sort
+SLList successfully sorted by Bubble Sort
+--------------
+Insertion Sort
+--------------
+ArrayList successfully sorted by Insertion Sort
+SLList successfully sorted by Insertion Sort

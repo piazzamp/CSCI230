@@ -74,11 +74,20 @@ public class StackImpl implements Stack {
 	 * 
 	 * @return
 	 */
+	
 	public int size() {
 		return list.size();
 		
 	} // end size() method
-	
+	public void print() {
+		System.out.print(" [ " ); try {
+			for ( int i=0; i<list.size(); i++ ) { System.out.printf("%d ", list.getData( i ) );
+			}
+		} catch( OutOfBoundsException error ) {
+			System.out.println( error.getMessage() );
+		}
+		System.out.println("]\n");
+	} // end print() method
 	/**
 	 * 
 	 * @param args

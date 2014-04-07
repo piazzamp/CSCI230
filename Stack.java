@@ -7,16 +7,14 @@ package edu.cofc.compsci.csci230;
  */
 public interface Stack {
 	
-	/*
-	 * 
-	 * These methods need to be implemented in the StackImpl Class
-	 * 
-	 */ 
-	
 	public void push( Node node );
 	
 	public Node pop();
 	
 	public Node peek( int index ) throws OutOfBoundsException;
-
+	
+	// New method in HW6
+	
+	public void print();
+	
 }

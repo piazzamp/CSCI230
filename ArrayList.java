@@ -145,7 +145,7 @@ public class ArrayList implements List {
 			if (emptyIndex == index) {
 				this.add(data);
 			}
-			else if (index<emptyIndex){ //split the array in half at the index and stick the new data in and reassemble
+			else if (index<=emptyIndex){ //split the array in half at the index and stick the new data in and reassemble
 				Node[] temp = new Node[nodeArray.length];
 				System.arraycopy(nodeArray, 0, temp, 0, index); //copy the first chunk
 				temp[index]=new Node(null,data);				//add the element
@@ -186,6 +186,63 @@ public class ArrayList implements List {
 	} // end remove() method
 
 	
+	@Override
+	public void swap(int i, int j) throws OutOfBoundsException {
+		if (i==j);//you don't have to do anything if the indices are ==
+		else if (i<0 || j<0 || i>=emptyIndex || j>=emptyIndex)
+			throw new OutOfBoundsException("indices "+i+" & "+j+" are not in the set of available indices for this list.");
+		else {
+			int temp = this.retrieve(i).getData();  				//store i's data
+			this.retrieve(i).setData(this.retrieve(j).getData());	//set i to j
+			this.retrieve(j).setData(temp);							//set j to i
+		}
+		
+	}
+	
+	/** 
+	* 
+	* Add new Node object to first index position 
+	* that does not have a node object 
+	* 
+	*/ 
+	public void add( Node node ) { 
+		if (emptyIndex >= nodeArray.length) { 
+			Node[] temp = new Node[nodeArray.length*2]; 
+			System.arraycopy( nodeArray, 0, temp, 0, nodeArray.length ); 
+			nodeArray = temp; 
+		} 
+		nodeArray[emptyIndex++] = node; 
+	} // end add() method 
+	
+	@Override
+	public void add(int index, Node node) throws OutOfBoundsException {
+		if (index>emptyIndex){
+			String message = String.format( "index position %d is past the end of your array!\n", index );
+			throw new OutOfBoundsException(message);
+		}
+		else {
+			if (emptyIndex >= nodeArray.length) { //double it if it's about to run out of space don't add node yet
+				Node[] temp = new Node[nodeArray.length*2];
+				System.arraycopy( nodeArray, 0, temp, 0, nodeArray.length );
+				nodeArray = temp;
+			}
+			
+			if (emptyIndex == index) {
+				this.add(node);
+			}
+			else if (index<=emptyIndex){ //split the array in half at the index and stick the new data in and reassemble
+				Node[] temp = new Node[nodeArray.length];
+				System.arraycopy(nodeArray, 0, temp, 0, index); //copy the first chunk
+				temp[index]=node;				//add the element
+				//copy the second chunk
+				System.arraycopy(nodeArray, index, temp, index+1, temp.length-index-1);
+				nodeArray=temp;
+				emptyIndex++;
+			}
+		}
+		
+	}
+
 	/**
 	 * 
 	 * Testing array list functionality

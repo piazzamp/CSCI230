@@ -179,20 +179,22 @@ public class SLList implements List {
 		try {
 			if (index == 0) {
 				head = retrieve(1);
+				size--;
 			} else if (index == size - 1) {
 				retrieve(index - 1).setNextNode(null);
-				;
+				size--;
 			} else {
 				Node current = retrieve(index);
 				Node left = retrieve(index - 1);
 				Node right = retrieve(index + 1);
 				left.setNextNode(right);
 				current.setNextNode(null);
+				size--;
 			}
 		} catch (OutOfBoundsException error) {
 			System.out.println(error.getMessage());
 		}
-		size--;
+		
 
 	} // end remove() method
 
@@ -222,6 +224,23 @@ public class SLList implements List {
 		size++;
 	} // end add() method
 
+	public void swap(int i, int j) throws OutOfBoundsException {
+		//swap element at index i with element at index j
+		if (i==j);//you don't have to do anything if the indices are ==
+		else if (i<0 || j<0 || i>=size || j>=size)
+			throw new OutOfBoundsException("indices "+i+" & "+j+" are not in the set of available indices for this list.");
+		
+		else{
+			Node eye = retrieve(i);
+			Node jay = retrieve(j);
+			int temp = eye.getData();
+			eye.setData(jay.getData()); //now i has j's data
+			jay.setData(temp); 			//and jay has i's which was stored in temp at line 230
+		}
+		
+		
+	}
+
 	/**
 	 * 
 	 * Remove all Node objects in the singly linked list.
@@ -232,6 +251,16 @@ public class SLList implements List {
 		size = 0;
 
 	} // end clear() method
+
+	public void add( Node node ) { 		 
+		 // will implement in future code 
+		} // end add() method 
+		/** 
+		* 
+		*/ 
+		public void add(int index, Node node ) throws OutOfBoundsException { 
+		 // will implement in future code 
+		} // end add() method 
 
 	/**
 	 * 
@@ -345,7 +374,61 @@ public class SLList implements List {
 			e.printStackTrace();
 		}
 		list.printList();
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println("swap indices 0 & 4");
+		System.out.println("----------------------------------------");
+		System.out.println();
 
+		try {
+			list.swap(0, 4);
+		} catch (OutOfBoundsException e) {
+			System.out.println(e.getMessage());
+		}
+		list.printList();
+
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println("swap indices 1 & 2");
+		System.out.println("----------------------------------------");
+		System.out.println();
+
+		try {
+			list.swap(1, 2);
+		} catch (OutOfBoundsException e) {
+			System.out.println(e.getMessage());
+		}
+		list.printList();
+		
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println("swap indices 3 & 3");
+		System.out.println("----------------------------------------");
+		System.out.println();
+
+		try {
+			list.swap(3, 3);
+		} catch (OutOfBoundsException e) {
+			System.out.println(e.getMessage());
+		}
+		list.printList();
+		
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println("swap indices 1 & 5");
+		System.out.println("----------------------------------------");
+		System.out.println();
+
+		try {
+			list.swap(1, 5);
+		} catch (OutOfBoundsException e) {
+			System.out.println(e.getMessage());
+		}
+		list.printList();
+
+
+
+		
 		System.out.println();
 		System.out.println("----------------------------------------");
 		System.out.println("CLEAR LIST / ABANDON SHIP");

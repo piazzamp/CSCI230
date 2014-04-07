@@ -7,16 +7,14 @@ package edu.cofc.compsci.csci230;
  */
 public interface Queue {
 	
-	/*
-	 * 
-	 * These methods need to be implemented in the QueueImpl Class
-	 * 
-	 */ 
-	
 	public void enqueue( Node node );
 	
 	public Node dequeue();
 	
 	public Node peek( int index ) throws OutOfBoundsException;
+	
+	// New method in HW6
+	
+	public boolean isEmpty();
 
 }
