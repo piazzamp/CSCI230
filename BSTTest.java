@@ -12,7 +12,7 @@ public class BSTTest {
 	public static void main(String[] args) {
 		
 		
-			BinarySearchTree bst = new BinarySearchTree();
+			BinarySearchTreeSOL bst = new BinarySearchTreeSOL();
 			
 			System.out.println("*********************************************");
 			System.out.println("Inserting nodes in BST" );

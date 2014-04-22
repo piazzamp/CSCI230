@@ -10,6 +10,11 @@ public class ArrayList implements List {
 	private Node[] nodeArray = new Node[10];
 	private int emptyIndex = 0;
 	
+	public ArrayList(){};
+	
+	public ArrayList(int startingSize){
+		this.nodeArray = new Node[startingSize];
+	}
 
 	/**
 	 * 

@@ -32,6 +32,12 @@ public class Node {
 	// visited variable
 	private int visited = NOT_VISITED;
 	
+	// ----------------------------------------
+	// Used for hashing algorithms
+	private String key; //word to be stored
+	private int hash; //address 
+	private List values = new ArrayList();
+	
 
 	/**
 	 * 
@@ -44,6 +50,9 @@ public class Node {
 		this.data = data;
 		
 	} // end overloaded constructor
+	
+	//default constructor
+	public Node(){};
 	
 	/**
 	 * 
@@ -319,6 +328,34 @@ public class Node {
 		
 	} // end getVisited();
 	
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public int getHash() {
+		return hash;
+	}
+
+	public void setHash(int hash) {
+		this.hash = hash;
+	}
+
+	public List getValues() {
+		return values;
+	}
+	//only for hashing!
+	public void addValue(Node node){
+		values.add(node);
+	}
+
+	public void setValues(List values) {
+		this.values = values;
+	}
+
 	/**
 	 * 
 	 * @return
