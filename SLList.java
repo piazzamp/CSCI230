@@ -46,6 +46,36 @@ public class SLList implements List {
 
 	} // end add() method
 
+	public void add( Node node ) { 	
+		if (head == null) {
+
+			head = node;
+
+		} else {
+			try {
+				Node next = node;
+				Node prev = retrieve(size - 1);
+				prev.setNextNode(next);
+			} catch (OutOfBoundsException error) {
+				System.out.println(error.getMessage());
+			}
+		}
+		size++;
+
+	} // end add() method 
+	
+	public boolean containsKey(String key){
+		for (int i=0; i<size; i++){
+			try {
+				if (retrieve(i).getKey().equals(key))
+					return true;
+			} catch (OutOfBoundsException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * 
 	 * @param index
@@ -252,10 +282,7 @@ public class SLList implements List {
 
 	} // end clear() method
 
-	public void add( Node node ) { 		 
-		 // will implement in future code 
-		} // end add() method 
-		/** 
+	/** 
 		* 
 		*/ 
 		public void add(int index, Node node ) throws OutOfBoundsException { 

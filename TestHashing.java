@@ -1,71 +1,76 @@
 package edu.cofc.compsci.csci230;
 
+import java.io.File;
+import java.util.Scanner;
+
 /**
  * @author mattpiazza
  * A class to test out some hashing functions
  * 
  */
 public class TestHashing {
-	
-	public static void main(String[] arrrgs){
-		//experiments run here
-//		OpenHashing oh = new OpenHashing(15);
-//		try {
-//			oh.insert("Hello!"); //2
-//			oh.insert("How");	 //1
-//			oh.insert("are");	 //7
-//			oh.insert("you"); 	 //14   *
-//			oh.insert("today?"); //3
-//			oh.insert("alf");	 //4  -
-//			oh.insert("sed");	 //10
-//			oh.insert("MAC");	 //6
-//			oh.insert("future"); //9
-//			oh.insert("space");	 //14   *
-//			oh.insert("travel"); //0
-//			oh.insert("OUTER");	 //14   *
-//			oh.insert("outer");	 //4  -
-//			
-//			System.out.println("\n----------------------\n");
-//			
-//			oh.delete("outer");
-//			oh.get("outer");
-//			
-//			System.out.println(oh.toString());
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
+	public static void main(String[] argz){
 		
-		ClosedHashing ch = new ClosedHashing(15, .9);
-		try {
-			ch.insert("Hello!"); //4
-			ch.insert("How");	 //5  
-			ch.insert("are");	 //9
-			ch.insert("you"); 	 //7
-			ch.insert("today?"); //6
-			ch.insert("alf");	 //1  * 
-			ch.insert("sed");	 //9
-			ch.insert("MAC");	 //4
-			ch.insert("future"); //3  -
-			ch.insert("space");	 //12
-			ch.insert("travel"); //11
-			ch.insert("OUTER");	 //1  *
-			ch.insert("outer");	 //3  -
-			
-			System.out.println("Hash address for key \"alf\" is: "+ch.get("alf").getHash());
-			//System.out.println("Hash address for key \"OUTER\" is: "+ch.get("OUTER").getHash());
-			
+
+		int wordCount=0;
+		OpenHashing oh = new OpenHashing(2000);
+		ClosedHashing ch = new ClosedHashing(11000); //has to be big enough to fit all the keys
+		
+		System.out.println(System.getProperty("user.dir")); //where your program runs, where I put pion.fun
+
+        try {
+        	File full = new File("./pion.fun"); 				//pion.fun contains 10,248 words
+			Scanner input = new Scanner(full);
+        	while(input.hasNext()){
+				String word = input.next();
+				wordCount++;
+				ch.insert(word);
+				oh.insert(word);
+			}
+			System.out.println(oh.toString());
 			System.out.println(ch.toString());
-			System.out.println("\n----------delete alf------------\n");
-			ch.delete("alf");
-			System.out.println(ch.toString()+"\n");
-			ch.keys.printList();
+			input.close();
 			
-			//ch.insert("outer");
+			File suc = new File("./success.txt");
+			Scanner success = new Scanner(suc);
 			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			long chSStart = System.currentTimeMillis();
+			while (success.hasNext()){
+				ch.get(success.next());
+			}
+			long chSEnd = System.currentTimeMillis();
+			success.close();
+			
+			success = new Scanner(suc); //reset the scanner
+			long ohSStart = System.currentTimeMillis();
+			while (success.hasNext()){
+				oh.get(success.next());
+			}
+			long ohSEnd = System.currentTimeMillis();
+			success.close();
+			
+			//unsuccessful searches
+			long ohStart=System.currentTimeMillis();
+			for (int m=0; m<1000; m++){
+				oh.get(String.valueOf(System.currentTimeMillis()));
+			}
+			long ohEnd=System.currentTimeMillis();
+			
+			long chStart=System.currentTimeMillis();
+			for (int m=0; m<1000; m++){
+				ch.get(String.valueOf(System.currentTimeMillis()));
+			}
+			long chEnd=System.currentTimeMillis();
+			success.close();
+			
+			System.out.printf("\n\nEmpirical time: Open Success: %dms Closed Success: %dms", ohSEnd-ohSStart, chSEnd-chSStart);
+			System.out.printf("\n\t    Open Fail: %dms Closed Fail: %dms", ohEnd-ohStart, chEnd-chStart);
+
+        }catch (Exception e){
 			e.printStackTrace();
-		} 
+		}
+		
+		System.out.printf("\nFilled Spots: Open:%d Closed:%d \nLoad Factor: Open:%f Closed:%f", oh.getFilled(), ch.getFilled(), oh.getLoad(), ch.getLoad());
 		
 	}
 

@@ -12,6 +12,10 @@ public class ArrayList implements List {
 	
 	public ArrayList(){};
 	
+	/**
+	 * only for use in ClosedHashing!!
+	 * @param startingSize
+	 */
 	public ArrayList(int startingSize){
 		this.nodeArray = new Node[startingSize];
 	}
