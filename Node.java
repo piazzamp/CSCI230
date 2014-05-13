@@ -332,8 +332,9 @@ public class Node {
 		return key;
 	}
 
-	public void setKey(String key) {
+	public Node setKey(String key) {
 		this.key = key;
+		return this;
 	}
 
 	public int getHash() {

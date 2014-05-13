@@ -41,7 +41,7 @@ public class BinarySearchTree extends UndirectedGraph {
 		if ( k < 0 ) throw new NodeException( String.format("k=%d Negative Values Not Allowed!", k ) );
 		if (this.hasNode(k)) throw new NodeException(String.format("Node %d is already in the tree!", k));
 		//if the tree is not empty and r is not in the tree:
-		if (bst_root!=null && !this.hasNode(r.getData())) throw new NodeException(String.format("Root node %d is not in the tree!", r.getData()));
+		//if (bst_root!=null && !this.hasNode(r.getData())) throw new NodeException(String.format("Root node %d is not in the tree!", r.getData()));
 
 		if (bst_root==null || this.list.size()==0) {
 			bst_root = new Node (null, k);
